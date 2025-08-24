@@ -6,6 +6,7 @@ import (
 	"net/http"
 	"time"
 
+	"github.com/SarthakBhat22/Web-Scraper-in-Go/internal/auth"
 	"github.com/SarthakBhat22/Web-Scraper-in-Go/internal/database"
 	"github.com/google/uuid"
 )
@@ -32,5 +33,21 @@ func (apiCfg *apiConfig) handlerCreateUser(w http.ResponseWriter, r *http.Reques
 		respondWithError(w, 400, fmt.Sprintf("Failed to create user: %v", err))
 		return
 	}
+	jsonResponse(w, 201, databaseUserToUser(user))
+}
+
+func (apiCfg *apiConfig) handlerGetUser(w http.ResponseWriter, r *http.Request) {
+	apiKey, err := auth.GetAPIKey(r.Header)
+	if err != nil {
+		respondWithError(w, 403, fmt.Sprintf("Authentication failed: %v", err))
+		return
+	}
+
+	user, err := apiCfg.DB.GetUserByAPIKey(r.Context(), apiKey)
+	if err != nil {
+		respondWithError(w, 400, fmt.Sprintf("Couldn't get user: %v", err))
+		return
+	}
+
 	jsonResponse(w, 200, databaseUserToUser(user))
 }
