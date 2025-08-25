@@ -6,6 +6,7 @@ import (
 	"log"
 	"net/http"
 	"os"
+	"time"
 
 	"github.com/SarthakBhat22/Web-Scraper-in-Go/internal/database"
 	"github.com/go-chi/chi"
@@ -41,6 +42,8 @@ func main() {
 	apiCfg := apiConfig{
 		DB: queries,
 	}
+
+	go startScraping(queries, 10, time.Minute)
 
 	router := chi.NewRouter()
 	router.Use(cors.Handler(cors.Options{
