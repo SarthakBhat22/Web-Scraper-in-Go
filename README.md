@@ -16,3 +16,19 @@ go get github.com/go-chi/chi
 go install github.com/sqlc-dev/sqlc/cmd/sqlc@latest
 go install github.com/pressly/goose/v3/cmd/goose@latest
 ```
+
+To setup the server, run the following command:
+
+```bash
+make setup
+```
+
+Change DB_URL variable in the Makefile to the correct one based on your system.
+
+Create a .env file specifying the PORT and DB_URL variables.
+
+Run the following command to start the server:
+
+```bash
+make run
+```
