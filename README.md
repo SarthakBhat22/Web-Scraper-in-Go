@@ -32,3 +32,8 @@ Run the following command to start the server:
 ```bash
 make run
 ```
+
+Postman or curl can be used to test the endpoints. Some require an authentication header with the user's API Key. 
+That would look something like this:
+
+<img width="884" height="162" alt="Screenshot 2025-08-30 at 9 58 13 PM" src="https://github.com/user-attachments/assets/5f49fce9-dd49-4fe1-b245-12a849f4357a" />
