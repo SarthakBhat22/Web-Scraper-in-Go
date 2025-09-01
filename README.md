@@ -40,5 +40,33 @@ That would look something like this:
 
 The endpoints are listed below that can be used with http://localhost:8080/v1/
 
-1. POST /users
-2. POST /feeds
+1. POST /users <br>
+   Include the body to register a new user, this step returns the api key for the user which must be stored and kept secret.
+```bash
+   {
+    "name": "Ben"
+   }
+   ```
+2. POST /feeds <br>
+  Add a new blog to the feed. This requires an Auth header with the api key.
+  ```bash
+    {
+      "name": "Example Blog",
+      "url": "https://egurl/index.xml"
+    }
+  ```
+3. GET /feeds <br>
+  Retrieves all the feeds added by authorized users.
+4. POST /feed_follows <br>
+   Allows the user to follow a feed using the feed id generated when the feed was added. It also requires an auth header with the user's api key.
+```bash
+   {
+    "feed_id": "<feed-id>"
+   }
+   ```
+5. GET /feed_follows <br>
+  Retrieves all the feeds that the authorized user is following.
+6. DELETE /feed_follows/<feed_follow_id> <br>
+   Include the unique feed follow id generated when the user started following the feed. This is not the feed id itself. Also requires the Auth header.
+7. GET /posts
+   Retrives all the blog posts from the feeds that the user is following.
